@@ -1,29 +1,9 @@
 def exact_sum?(k, coins)
-  backtracking_sum(k, coins, 0)
-end
-
-
-# def backtracking_sum(result, n, array)
-#   n= array.length
-#   n = array.inject(0){|sum,x| sum + x} #total iterations calculus
-#   return true if n == 0 #means we have reached all iterations 
-#   return false if sum <= result
-#   end
-
-
-def backtracking_sum(result, array, start)
-  start = 0
-  n = (array.length - 1)
-  sum = 0
-  return true if result == (0..n).each do |i| puts sum += array[i]
-  return false if start == n +1
-  (0..n).each do |i| puts sum += array[i] 
-    return true if sum == result 
-    # sum +=array[i+1] if sum > result  
-    break if sum > result 
-  end
-  backtracking_sum(result, array, start+1)
-end
+  #write your code here
+  return true if k == 0
+  return false if coins.empty? || k < 0
+  
+  exact_sum?(k-coins[0], coins[1..-1]) || exact_sum?(k, coins[1..-1])
 end
 
 puts exact_sum?(12, [1, 2, 3, 4, 5])
@@ -31,3 +11,15 @@ puts exact_sum?(12, [1, 2, 3, 4, 5])
 
 puts exact_sum?(11, [1, 5, 9, 13])
 # => false
+
+puts exact_sum?(42, [3, 16, 11, 5, 11, 5])
+# => false
+
+puts exact_sum?(51, [8, 12, 15, 7, 11, 14])
+# => false
+
+puts exact_sum?(50, [1, 3, 5, 37, 18, 5])
+# => true
+
+puts exact_sum?(201, [37, 42, 10, 23, 15, 25, 11, 6, 19, 25, 51])
+# => true
