@@ -10,6 +10,5 @@
 ## About
 
 You can reach me at: 
- - [Github](https://github.com/misselliev/)
  - [Twitter](https://twitter.com/miss_elliev/)
 
