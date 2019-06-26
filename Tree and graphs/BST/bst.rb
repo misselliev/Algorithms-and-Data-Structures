@@ -7,7 +7,7 @@ class Node
   end
 end
 
-def array_to_tree(array, i)
+def array_to_tree(array, i=0)
   return nil if i >= array.length || array[i] == 0
   node = Node.new(array[i])
   node.left = array_to_tree(array, 2*i+1)
@@ -27,8 +27,7 @@ def pre_order(node)
 end
 
 def binary_search_tree(array)
-  pre_order(array)
-  
+  answer= pre_order(array_to_tree(array)).gsub(/\s+$/,'')
 end
 puts binary_search_tree([8, 3, 10, 1, 6, 14, 4, 7, 13])
 # => "8 3 1 6 4 7 10 14 13"
