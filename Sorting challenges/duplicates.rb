@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 def duplicates(arr1, arr2)
   data = arr1 + arr2
   result = []
@@ -7,9 +8,9 @@ def duplicates(arr1, arr2)
     counts[item] += 1
   end
   counts.each do |key, value|
-    result.push(key) if value>=3 && value.odd?
+    result.push(key) if value >= 3 && value.odd?
   end
-  return result.sort!
+  result.sort!
 end
 
 p duplicates([203, 204, 205, 206, 207, 208, 203, 204, 205, 206],

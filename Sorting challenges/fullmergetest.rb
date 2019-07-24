@@ -24,8 +24,15 @@ def merge(array1, array2)
   return result
 end
 
-# leftsort, rightsort = [], []
 def full_merge_sort(array)
+  numbers.each_with_index do |num, idx|
+    result << array.select  {|i| i.split(/\W+/)[0].to_i == idx}
+    #0 index of result array
+  end
+  result.flatten!
+  result.each_with_index {|num, idx| result[idx] = num.split(/\W+/)[1] }
+  
+  
   answer = []
   return array if array.length <= 1  
   mid = (array.length/2).floor
