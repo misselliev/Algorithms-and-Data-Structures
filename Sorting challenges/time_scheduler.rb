@@ -3,7 +3,7 @@
 def time_scheduler(array)
   answer = []
   a = 0
-  # slicing in subarrays sorted by start time
+  # slicing in subarrays sorted by finish time
   sorted = array.each_slice(2).sort_by { |_x, y| y }
   # adding first element that takes least amount of time to complete
   answer.push(sorted[0])
