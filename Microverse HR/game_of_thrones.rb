@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 def gameOfThrones(s)
-  result = []
-  counts = Hash.new(0)
-  s.each_char { |item| counts[item] += 1 }
-  counts.each {|item, key| key.odd? && key >= 1 || key >=3  ? result= 'YES' : result = 'NO'}
-  return result
+  temp = Hash.new(0)
+  s.each_char { |item| temp[item] += 1 }
+  temp.values.count{|num| num % 2 != 0} > 1 ? "NO" : "YES"
 end
 
 p gameOfThrones('aaabbbb')
