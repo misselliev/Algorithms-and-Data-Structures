@@ -1,24 +1,29 @@
 def maximum_time_range(array)
   answer = []
-  a = 0
   # slicing in subarrays sorted by start time
+  copy = array.each_slice(2).sort
   sorted = array.each_slice(2).sort
-
-  until a == sorted.length - 1
-    answer.push(sorted[a]) if sorted[a+1][0] < sorted[a][1] && sorted[a][1] > sorted[a+1][1] || sorted[a][1] < sorted[a+1][0] && !answer.include?(sorted[a][1])
-    
-    if !answer.empty?
-      answer.push(sorted[a]) if answer.last[1] > sorted[a][0]
+  #adding first activity and removing it from array
+  answer.push(sorted[0])
+  sorted.shift()
+  x = sorted.length
+  
+  until x == 0
+    a = sorted[0][0]
+    b = sorted[0][1]
+    c = answer[0][0]
+    d = answer[0][1]
+    if b >= d && c <= b
+      answer.push([c,b])
+      answer.shift
+    else
+      answer.push([a,b])
     end
-    #answer.last[0][]
-    
-    # adding up subarrays
-    answer.push([sorted[a][0],sorted[a+1][1]]) if sorted[a+1][0] < sorted[a][1] && sorted[a+1][1] > sorted[a][1]
-    a+=1
+    sorted.shift
+    x-=1
   end
   
-  p sorted
-  p sorted.length
+  p copy
   p answer
   "///"
 
