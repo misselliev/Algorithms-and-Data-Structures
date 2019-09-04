@@ -1,33 +1,47 @@
 def maximum_time_range(array)
-  answer = []
-  # slicing in subarrays sorted by start time
-  copy = array.each_slice(2).sort
-  sorted = array.each_slice(2).sort
-  #adding first activity and removing it from array
-  answer.push(sorted[0])
-  sorted.shift()
-  x = sorted.length
+  times = hours(array)
+  results = hours_to_timeslot(times)
+  return results.flatten if results.size == 1
   
-  until x == 0
-    a = sorted[0][0]
-    b = sorted[0][1]
-    c = answer[0][0]
-    d = answer[0][1]
-    if b >= d && c <= b
-      answer.push([c,b])
-      answer.shift
-    else
-      answer.push([a,b])
-    end
-    sorted.shift
-    x-=1
-  end
-  
-  p copy
-  p answer
-  "///"
-
+  results
 end
+
+def hours_to_timeslot(times)
+  index = 0
+  results = Array.new
+  while index < times.size do
+    start = times[index]
+    while index + 1 < times.size && times[index] + 1 == times[index + 1]
+      index += 1
+    end
+    fin = times[index] + 1
+    results << [start, fin]
+    index += 1
+  end
+  results
+end
+
+def hours(array)
+  ranges = timeslot(array)
+  times = Array.new
+  ranges.each do |range|
+    (range[0]...range[1]).each do |time|
+      times << time
+    end
+  end
+  times.uniq.sort
+end
+
+def timeslot(array)
+  index = 0
+  ranges = Array.new
+  until index >= array.size do
+    ranges << [array[index], array[index + 1]]
+    index += 2
+  end
+  ranges
+end
+
 
 p maximum_time_range([10, 18, 4, 6, 14, 16, 5, 8])
 # => [[4, 8], [10, 18]]

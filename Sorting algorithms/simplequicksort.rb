@@ -31,6 +31,7 @@ end
 def merge(array)
   puts array.flatten.compact.join(' ') if array.size > 1
   array.flatten.compact if array.size > 1
+  counter +=1
 end
 p simple_quicksort([5, 8, 1, 3, 7, 10, 2])
 # => 2 3

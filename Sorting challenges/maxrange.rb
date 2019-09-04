@@ -3,18 +3,22 @@ def maximum_time_range(array)
   a = 0
   # slicing in subarrays sorted by start time
   sorted = array.each_slice(2).sort
-
+  answer.push(sorted[a])
+  a = 1
   until a == sorted.length - 1
-    answer.push(sorted[a]) if sorted[a+1][0] < sorted[a][1] && sorted[a][1] > sorted[a+1][1] || sorted[a][1] < sorted[a+1][0] && !answer.include?(sorted[a][1])
+    answer.push([answer[0][0],sorted[a][1]]) if sorted[a][0] > answer[0][0] && sorted[a][1] > answer[0][1] 
+    answer.shift()
+    #|| sorted[a][1] < sorted[a+1][0] && !answer.include?(sorted[a][1]) 
     
-    if !answer.empty?
-      answer.push(sorted[a]) if answer.last[1] > sorted[a][0]
-    end
+    # if !answer.empty?
+    #   answer.push(sorted[a]) if answer.last[1] > sorted[a][0] unless answer.include?(sorted[a])
+    # end
     #answer.last[0][]
     
     # adding up subarrays
-    answer.push([sorted[a][0],sorted[a+1][1]]) if sorted[a+1][0] < sorted[a][1] && sorted[a+1][1] > sorted[a][1]
+    answer.push(sorted[a]) if sorted[a][0] > answer.last[0] 
     a+=1
+    # answer.push([sorted[a][0],sorted[a+1][1]]) if sorted[a+1][0] < sorted[a][1] && sorted[a+1][1] > sorted[a][1] 
   end
   
   p sorted
@@ -22,6 +26,22 @@ def maximum_time_range(array)
   p answer
   "///"
 
+  #   until a == sorted.length - 1
+  #   answer.push(sorted[a]) if sorted[a+1][0] < sorted[a][1] && sorted[a][1] > sorted[a+1][1] || sorted[a][1] < sorted[a+1][0] && !answer.include?(sorted[a][1]) 
+    
+  #   if !answer.empty?
+  #     answer.push(sorted[a]) if answer.last[1] > sorted[a][0] unless answer.include?(sorted[a])
+  #   end
+  #   #answer.last[0][]
+    
+  #   # adding up subarrays
+  #   answer.push([sorted[a][0],sorted[a+1][1]]) if sorted[a+1][0] < sorted[a][1] && sorted[a+1][1] > sorted[a][1] 
+  #   a+=1
+  # end
+  
+  # p sorted
+  # p sorted.length
+  # p answer
 end
 
 p maximum_time_range([10, 18, 4, 6, 14, 16, 5, 8])
